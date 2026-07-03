@@ -4,17 +4,23 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     env:
-      HEADLESS: "1"          # Chrome sin ventana (servidor sin pantalla)
-    defaults:
-      run:
-        working-directory: scripts/semana07_s2_selenium
+      HEADLESS: "1"
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: pytest --html=reporte.html --self-contained-html
+
+      - name: Debug repo files
+        run: ls -la
+
+      - name: Install requirements
+        run: pip install -r scripts/semana07_s2_selenium/requirements.txt
+
+      - name: Run tests
+        run: pytest scripts/semana07_s2_selenium --html=scripts/semana07_s2_selenium/reporte.html --self-contained-html
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
