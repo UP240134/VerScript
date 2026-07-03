@@ -8,11 +8,17 @@ Modo headless (sin ventana, útil en CI):  HEADLESS=1 pytest
 """
 
 import os
+import sys         # <-- AGREGADO PARA LAS RUTAS
 import pathlib
 
 import pytest
 from selenium import webdriver
 
+# --- AGREGADO PARA ARREGLAR EL ERROR DE "No module named 'pages'" ---
+# Identifica la carpeta principal (la raíz del proyecto) y la agrega al PATH
+root_dir = str(pathlib.Path(__file__).resolve().parents[1])
+sys.path.insert(0, root_dir)
+# --------------------------------------------------------------------
 
 @pytest.fixture
 def base_url():
