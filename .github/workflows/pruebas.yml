@@ -20,8 +20,8 @@ jobs:
 
       - name: Run tests
         env:
-          PYTHONPATH: .
-        run: pytest ./ --html=reporte.html --self-contained-html
+          PYTHONPATH: ./solucion_reto
+        run: pytest solucion_reto/ --html=reporte.html --self-contained-html
 
       - uses: actions/upload-artifact@v4
         if: always()
